@@ -24,13 +24,14 @@ app.get('/player/:name', (req, res) => {
     client.query(`SELECT * FROM "medwardson/nba-data"."playerdata" 
                     WHERE player_name='${req.params.name}';`, (err, r) => {
         console.table(r.rows);
-        // console.log(res.rows);
         final_data = r.rows[0];
-        res.send(final_data);
+        if (final_data) {
+            res.send(final_data);
+        } else {
+            res.send("Error - No player by that name was found.")
+        }
+        
     });
-
-
-    // res.send(final_data);
 })
 
 app.listen(process.env.PORT || port), () => {
