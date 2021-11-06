@@ -11,13 +11,12 @@ app.get('/', (req, res) => {
 })
 
 app.get('/player/:name', (req, res) => {
-    let pw = process.env.PASSWORD;
     let final_data;
     const client = new Client({
         user: 'medwardson_demo_db_connection',
         host: 'db.bit.io',
         database: 'bitdotio',
-        password: process.env.PW,
+        password: process.env.PASSWORD,
         port: 5432,
     });
     client.connect();
