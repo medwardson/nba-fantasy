@@ -14,7 +14,7 @@ app.get('/player/:name', (req, res) => {
         user: 'medwardson_demo_db_connection',
         host: 'db.bit.io',
         database: 'bitdotio',
-        password: 'LWR4_Ju85PAGkibXCj2qeKC787WX',
+        password: proccess.env.PASSWORD,
         port: 5432,
     });
     client.connect();
