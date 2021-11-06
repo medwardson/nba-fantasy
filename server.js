@@ -31,6 +31,6 @@ app.get('/player/:name', (req, res) => {
     // res.send(final_data);
 })
 
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`)
-})
+app.listen(process.env.PORT || port), () => {
+  console.log(`Example app listening at http://localhost:${port}`);
+}
