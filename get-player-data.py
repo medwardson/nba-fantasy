@@ -1,7 +1,15 @@
 import json
+import os
+import psycopg2
 import time
+import requests
 from nba_api.stats.static import players
 from nba_api.stats.endpoints import commonplayerinfo
+from dotenv import load_dotenv
+
+load_dotenv()
+token = os.getenv('BITTOKEN')
+pw = os.getenv('PASSWORD')
 
 # Get all active NBA Players
 player_dict = players.get_active_players()
@@ -39,3 +47,38 @@ print(player_stat_dict)
 f = open("playerdata.json", "w")
 f.write(json.dumps(player_stat_dict))
 f.close()
+
+conn = psycopg2.connect(
+   database="bitdotio", user='medwardson_demo_db_connection', password=pw, host='db.bit.io', port= '5432'
+)
+
+
+# Setting auto commit false
+conn.autocommit = True
+
+#Creating a cursor object using the cursor() method
+cursor = conn.cursor()
+
+#Doping EMPLOYEE table if already exists
+cursor.execute('DROP TABLE "medwardson/nba-data"."playerdata"')
+print("Table dropped... ")
+
+#Commit your changes in the database
+conn.commit()
+
+#Closing the connection
+conn.close()
+
+
+with open("playerdata.json", 'rb') as f:
+    data = f.read()
+
+url = 'https://import.bit.io/medwardson/nba-data/playerdata'
+
+headers = {
+    "Content-Disposition": "attachment;filename='test.csv'",
+    "Authorization": "Bearer {}".format(token)
+}
+
+response = requests.request("POST", url, headers=headers, data=data)
+print("Table added")

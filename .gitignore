@@ -14,8 +14,8 @@ dist/
 downloads/
 eggs/
 .eggs/
-lib/
 lib64/
+lib/
 parts/
 sdist/
 var/
@@ -23,8 +23,8 @@ wheels/
 pip-wheel-metadata/
 share/python-wheels/
 *.egg-info/
-.installed.cfg
 *.egg
+.installed.cfg
 MANIFEST
 
 # PyInstaller
@@ -101,8 +101,8 @@ celerybeat.pid
 # SageMath parsed files
 *.sage.py
 
-# Environments
 .env
+# Environments
 .venv
 env/
 venv/
@@ -130,3 +130,4 @@ dmypy.json
 
 /node_modules
 package-lock.json
+playerdata.json
