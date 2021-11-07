@@ -30,7 +30,7 @@ app.get('/player/:name', (req, res) => {
         } else {
             res.send("Error - No player by that name was found.")
         }
-        
+        client.end();
     });
 })
 
